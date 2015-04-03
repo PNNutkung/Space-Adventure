@@ -1,7 +1,7 @@
 var WaveBullet = Bullet.extend({
     ctor: function() {
         this._super();
-    }
+    },
     update: function( dt ) {
         var pos = this.getPosition();
 

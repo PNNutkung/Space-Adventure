@@ -41,8 +41,7 @@ var GameLayer = cc.LayerColor.extend({
         var self = this;
         this.bullets.forEach( function( bullet, i ) {
             var x = bullet.getPositionX();
-            if ( ( x < screenWidth ) &&
-                 ( x > screenWidth - 100 ) ) {
+            if ( isOutOfScreen( x ) ) {
                 var y = bullet.getPositionY();
                 if ( Math.abs( y - self.ship.getPositionY() ) < 25 ) {
                     bullet.randomPosition();
@@ -62,7 +61,9 @@ var GameLayer = cc.LayerColor.extend({
             }
         });
     },
-    
+    isOutOfScreen: function( x ) {
+        return ( x < screenWidth ) && ( x > screenWidth - 100 );
+    },
     onKeyDown: function( keyCode, event ) {
         if ( keyCode == cc.KEY.up ) {
             var y = this.ship.getPositionY();
