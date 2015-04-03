@@ -12,7 +12,7 @@ var GameLayer = cc.LayerColor.extend({
             var p = Math.random();
             var bullet = null; 
             if ( p <= 0.4) {
-                bullet = new Bullet();
+                bullet = new NormalBullet();
             } else if ( p <= 0.7 ) {
                 bullet = new FastBullet();
             } else {

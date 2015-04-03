@@ -16,6 +16,7 @@
         "src/Ship.js",
         "src/Bullet.js",
         "src/FastBullet.js",
-        "src/WaveBullet.js"
+        "src/WaveBullet.js",
+        "src/NormalBullet.js"
     ]
 }

@@ -1,4 +1,4 @@
-var FastBullet = cc.Sprite.extend({
+var FastBullet = Bullet.extend({
     ctor: function() {
         this._super();
         this.initWithFile( 'res/images/bullet.png' );

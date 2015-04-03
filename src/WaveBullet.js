@@ -1,11 +1,4 @@
-var WaveBullet = cc.Sprite.extend({
-    ctor: function() {
-        this._super();
-        this.initWithFile( 'res/images/bullet.png' );
-        this.step = 0;
-        this.period = 30.0 + Math.random() * 20;
-    },
-
+var WaveBullet = Bullet.extend({
     update: function( dt ) {
         var pos = this.getPosition();
 
