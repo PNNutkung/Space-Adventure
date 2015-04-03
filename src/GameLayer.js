@@ -1,4 +1,5 @@
 var GameLayer = cc.LayerColor.extend({
+    
     init: function() {
         this._super( new cc.Color( 0, 0, 0, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
@@ -12,11 +13,13 @@ var GameLayer = cc.LayerColor.extend({
         
         return true;
     },
+
     newPlayer: function () {
         this.ship = new Ship();
         this.ship.setPosition( new cc.Point( 700, 300 ) );
         this.addChild( this.ship );
     },
+    
     newBullet: function() {
         this.bullets = [];
         for ( var i = 0; i < 15; i++ ) {
@@ -33,18 +36,21 @@ var GameLayer = cc.LayerColor.extend({
             this.bullets.push( bullet );
         }
     },
+    
     randomBulletPosition: function( bullet, i ) {
         bullet.randomPosition();
         bullet.setPositionX( 100 - 150 * i );
         this.addChild( bullet );
         bullet.scheduleUpdate();
     },
+    
     newLife: function() {
         this.life = 10;
         this.lifeLabel = cc.LabelTTF.create( 10, 'Arial', 32 );
         this.lifeLabel.setPosition( cc.p( 700, 550 ) );
         this.addChild( this.lifeLabel );
     },
+    
     update: function( dt ) {
         var self = this;
         this.bullets.forEach( function( bullet, i ) {
@@ -57,9 +63,11 @@ var GameLayer = cc.LayerColor.extend({
             }
         });
     },
+    
     isOutOfScreen: function( x ) {
         return ( x < screenWidth ) && ( x > screenWidth - 100 );
     },
+    
     isPlayer: function( bullet ) {
         var self = this;
         var y = bullet.getPositionY();
@@ -73,6 +81,7 @@ var GameLayer = cc.LayerColor.extend({
             return;
         }
     },
+    
     gameOver: function() {
         var self = this;
         var gameOverLabel = cc.LabelTTF.create( 'Game over', 'Arial', 60 );
@@ -80,6 +89,7 @@ var GameLayer = cc.LayerColor.extend({
         self.addChild( gameOverLabel );
         cc.director.pause();
     },
+    
     onKeyDown: function( keyCode, event ) {
         if ( keyCode == cc.KEY.up ) {
             var y = this.ship.getPositionY();
