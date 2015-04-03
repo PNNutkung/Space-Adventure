@@ -41,20 +41,8 @@ var GameLayer = cc.LayerColor.extend({
         var self = this;
         this.bullets.forEach( function( bullet, i ) {
             var x = bullet.getPositionX();
-            if ( isOutOfScreen( x ) ) {
-                var y = bullet.getPositionY();
-                if ( Math.abs( y - self.ship.getPositionY() ) < 25 ) {
-                    bullet.randomPosition();
-                    self.life -= 1;
-                    self.lifeLabel.setString( self.life );
-                    if ( self.life == 0 ) {
-                        var gameOverLabel = cc.LabelTTF.create( 'Game over', 'Arial', 60 );
-                        gameOverLabel.setPosition( cc.p( 400, 300 ) );
-                        self.addChild( gameOverLabel );
-                        cc.director.pause();
-                    }
-                    return;
-                }
+            if ( self.isOutOfScreen( x ) ) {
+                self.isPlayer();
             }
             if ( x > screenWidth ) {
                 bullet.randomPosition();
@@ -63,6 +51,26 @@ var GameLayer = cc.LayerColor.extend({
     },
     isOutOfScreen: function( x ) {
         return ( x < screenWidth ) && ( x > screenWidth - 100 );
+    },
+    isPlayer: function() {
+        var self = this;
+        var y = bullet.getPositionY();
+        if ( Math.abs( y - self.ship.getPositionY() ) < 25 ) {
+            bullet.randomPosition();
+            self.life -= 1;
+            self.lifeLabel.setString( self.life );
+            if ( self.life == 0 ) {
+                self.gameOver();
+            }
+            return;
+        }
+    },
+    gameOver: function() {
+        var self = this;
+        var gameOverLabel = cc.LabelTTF.create( 'Game over', 'Arial', 60 );
+                gameOverLabel.setPosition( cc.p( 400, 300 ) );
+                self.addChild( gameOverLabel );
+                cc.director.pause();
     },
     onKeyDown: function( keyCode, event ) {
         if ( keyCode == cc.KEY.up ) {
@@ -96,7 +104,7 @@ var GameLayer = cc.LayerColor.extend({
         }, this);
     }
 });
- 
+
 var StartScene = cc.Scene.extend({
     onEnter: function() {
         this._super();
